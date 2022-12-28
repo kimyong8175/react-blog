@@ -9,6 +9,11 @@
       "title": "React project with Yong",
       "body": "Hello, this is Yong.",
       "id": 2
+    },
+    {
+      "title": "Vacation",
+      "body": "Enjoying",
+      "id": 3
     }
   ]
 }

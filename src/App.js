@@ -1,47 +1,25 @@
-import { useState } from "react";
-import axios from "axios";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import routes from "./routes";
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-
-  const onSubmit = () => {
-    axios.post("http://localhost:3001/posts", {
-      title,
-      body,
-    });
-  };
-
   return (
-    <>
+    <Router>
+      <NavBar />
       <div className="container">
-        <div className="mb-3">
-          <label className="form-label">Title</label>
-          <input
-            className="form-control"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Body</label>
-          <textarea
-            className="form-control"
-            value={body}
-            onChange={(e) => {
-              setBody(e.target.value);
-            }}
-            rows="20"
-          />
-        </div>
-        <button onClick={onSubmit} className="btn btn-primary">
-          Post
-        </button>
+        <Routes>
+          {routes.map((route, index) => {
+            return (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={<route.element />}
+              />
+            );
+          })}
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 

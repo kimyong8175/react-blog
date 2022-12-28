@@ -16,3 +16,9 @@ axios.post("http://localhost:3001/posts", {
 title,
 body,
 });
+
+React-router-dom을 사용하면서 어려웠던 점
+=> 강의에서는 v6 이전 버전을 사용하기 때문에 몇몇 헷갈렸던 부분들이 있었다.
+
+1. Switch -> Routes
+2. One difference as of v6.0.0-beta.3 is that activeClassName and activeStyle have been removed from NavLinkProps. Instead, you can pass a function to either style or className that will allow you to customize the inline styling or the class string based on the component's active state.
