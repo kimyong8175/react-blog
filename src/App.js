@@ -6,12 +6,12 @@ function App() {
   return (
     <Router>
       <NavBar />
-      <div className="container">
+      <div className="container mt-3">
         <Routes>
-          {routes.map((route, index) => {
+          {routes.map((route) => {
             return (
               <Route
-                key={route.path}
+                key={route.id}
                 path={route.path}
                 element={<route.element />}
               />
