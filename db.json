@@ -1,19 +1,9 @@
 {
   "posts": [
     {
-      "title": "hello",
-      "body": "body",
+      "title": "Go vacation with Yong",
+      "body": "Let's go",
       "id": 1
-    },
-    {
-      "title": "React project with Yong",
-      "body": "Hello, this is Yong.",
-      "id": 2
-    },
-    {
-      "title": "Vacation",
-      "body": "Enjoying",
-      "id": 3
     }
   ]
 }

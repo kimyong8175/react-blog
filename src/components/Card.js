@@ -4,14 +4,13 @@ import PropTypes from "prop-types";
 const Card = ({ title, onClick, children }) => {
   //return <div className="card mb-3">{children}</div>;
   return (
-    <div className="card mb-3" onClick={onClick}>
-      {children !== null ? (
-        children
-      ) : (
-        <div>
-          <h3>{title}</h3>
+    <div className="card mb-3 cursor-pointer" onClick={onClick}>
+      <div className="card-body">
+        <div className="d-flex justify-content-between">
+          <div>{title}</div>
+          {children && <div>{children}</div>}
         </div>
-      )}
+      </div>
       {/* edit 와 delete 같은 버튼을 children으로 넘겨줄수있음 */}
     </div>
   );
