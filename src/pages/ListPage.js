@@ -47,7 +47,7 @@ const ListPage = () => {
           key={list.id}
           title={list.title}
           onClick={() => {
-            navigate("/blogs/edit");
+            navigate(`/blogs/${list.id}`);
           }}
         >
           <div>
@@ -71,7 +71,7 @@ const ListPage = () => {
     <div>
       <div className="d-flex justify-content-between">
         <h1>Blog Lists</h1>
-        <Link className="btn btn-success" to="/blogs/create">
+        <Link className="btn btn-lg btn-success" to="/blogs/create">
           Create New
         </Link>
       </div>
