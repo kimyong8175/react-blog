@@ -1,10 +1,22 @@
 {
   "posts": [
     {
-      "title": "ㄷ33ㅇ3ㄱㄹ5",
-      "body": "ㄱㅇㄱㅇ3ㅇ3ㄱㅇ3",
+      "title": "Avatar2",
+      "body": "This is so boring.",
       "createdAt": 1672438502523,
       "id": 1
+    },
+    {
+      "title": "First React Project",
+      "body": "Project with Kossie Coder",
+      "createdAt": 1672719128566,
+      "id": 2
+    },
+    {
+      "title": "Redux",
+      "body": "learn Redux",
+      "createdAt": 1672719660954,
+      "id": 3
     }
   ]
 }
