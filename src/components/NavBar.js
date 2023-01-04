@@ -12,7 +12,23 @@ const NavBar = () => {
           Home
         </Link>
 
-        <ul className="navbar-nav">
+        <ul
+          style={{
+            flexDirection: "row",
+          }}
+          className="navbar-nav"
+        >
+          <li className="nav-item me-2">
+            <NavLink
+              className="nav-link"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              aria-current="page"
+              to="/Admin"
+            >
+              Admin
+            </NavLink>
+          </li>
+
           <li className="nav-item">
             <NavLink
               className="nav-link"
