@@ -23,7 +23,7 @@ const NavBar = () => {
               className="nav-link"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
               aria-current="page"
-              to="/Admin"
+              to="/admin"
             >
               Admin
             </NavLink>

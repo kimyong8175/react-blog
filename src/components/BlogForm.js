@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { bool } from "prop-types";
+import propTypes from "prop-types";
 
 const BlogForm = ({ editing }) => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [originalTitle, setOriginalTitle] = useState("");
   const [originalBody, setoriginalBody] = useState("");
   const [publish, setPublish] = useState(false);
   const [originalPublish, setOriginalPublish] = useState(false);
-  const { id } = useParams();
-  let navigate = useNavigate();
+  const [titleError, setTitleError] = useState(false);
+  const [bodyError, setBodyError] = useState(false);
 
   useEffect(() => {
     if (editing) {
@@ -43,38 +45,58 @@ const BlogForm = ({ editing }) => {
 
   const goBack = () => {
     if (editing) navigate(`/blogs/${id}`);
-    else navigate("/blogs");
+    else navigate("/admin");
   };
 
   const onChangePublish = (e) => {
     publish === false ? setPublish(true) : setPublish(false);
   };
 
+  const validateForm = () => {
+    let validated = true;
+
+    if (title === "") {
+      setTitleError(true);
+      validated = false;
+    }
+
+    if (body === "") {
+      setBodyError(true);
+      validated = false;
+    }
+
+    return validated;
+  };
+
   const onSubmit = () => {
-    if (editing) {
-      axios
-        .patch(`http://localhost:3001/posts/${id}`, {
-          title,
-          body,
-          publish,
-        })
-        .then(() => {
-          navigate(`/blogs/${id}`);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      axios
-        .post("http://localhost:3001/posts", {
-          title,
-          body,
-          publish,
-          createdAt: Date.now(),
-        })
-        .then(() => {
-          navigate("/admin");
-        });
+    setTitleError(false);
+    setBodyError(false);
+    if (validateForm()) {
+      if (editing) {
+        axios
+          .patch(`http://localhost:3001/posts/${id}`, {
+            title,
+            body,
+            publish,
+          })
+          .then(() => {
+            navigate(`/blogs/${id}`);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        axios
+          .post("http://localhost:3001/posts", {
+            title,
+            body,
+            publish,
+            createdAt: Date.now(),
+          })
+          .then(() => {
+            navigate("/admin");
+          });
+      }
     }
   };
   return (
@@ -83,24 +105,26 @@ const BlogForm = ({ editing }) => {
       <div className="mb-3">
         <label className="form-label">Title</label>
         <input
-          className="form-control"
+          className={`form-control ${titleError && "border-danger"}`}
           value={title}
           onChange={(e) => {
             setTitle(e.target.value);
           }}
         />
+        {titleError && <div className="text-danger">Title is required.</div>}
       </div>
 
       <div className="mb-3">
         <label className="form-label">Body</label>
         <textarea
-          className="form-control"
+          className={`form-control ${bodyError && "border-danger"}`}
           value={body}
           onChange={(e) => {
             setBody(e.target.value);
           }}
           rows="20"
         />
+        {bodyError && <div className="text-danger">Body is required.</div>}
       </div>
       <div className="form-check mb-2">
         <input
@@ -140,7 +164,7 @@ const BlogForm = ({ editing }) => {
 };
 
 BlogForm.propTypes = {
-  editing: bool,
+  editing: propTypes.bool,
 };
 
 BlogForm.defaultProps = {

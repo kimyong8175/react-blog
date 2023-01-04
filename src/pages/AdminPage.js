@@ -12,7 +12,6 @@ const AdminPage = () => {
           </Link>
         </div>
       </div>
-      <hr />
       <BlogList isAdmin={true} />
     </div>
   );
