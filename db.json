@@ -88,34 +88,6 @@
       "publish": false,
       "createdAt": 1672792980714,
       "id": 13
-    },
-    {
-      "title": "test8",
-      "body": "test123",
-      "publish": false,
-      "createdAt": 1672792980714,
-      "id": 14
-    },
-    {
-      "title": "test9",
-      "body": "test123",
-      "publish": false,
-      "createdAt": 1672792980714,
-      "id": 15
-    },
-    {
-      "title": "test10",
-      "body": "test123",
-      "publish": false,
-      "createdAt": 1672792980714,
-      "id": 16
-    },
-    {
-      "title": "test11",
-      "body": "test123",
-      "publish": false,
-      "createdAt": 1672792980714,
-      "id": 17
     }
   ]
 }
