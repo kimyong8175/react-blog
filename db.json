@@ -8,86 +8,18 @@
       "publish": true
     },
     {
-      "title": "First React Project",
-      "body": "Project with Kossie Coder",
-      "createdAt": 1672719128566,
+      "title": "Welcome",
+      "body": "Hello",
+      "publish": true,
+      "createdAt": 1673313597258,
       "id": 2
     },
     {
-      "title": "Redux",
-      "body": "learn Redux",
-      "createdAt": 1672719660954,
+      "title": "Friend with benefit",
+      "body": "Romance Movie",
+      "publish": false,
+      "createdAt": 1673313675185,
       "id": 3
-    },
-    {
-      "title": "Vacation with Yong",
-      "body": "Hello, asdasd",
-      "publish": false,
-      "createdAt": 1672790214877,
-      "id": 4
-    },
-    {
-      "title": "Greeting",
-      "body": "Hellllllloooooooo~@",
-      "publish": true,
-      "createdAt": 1672790245770,
-      "id": 5
-    },
-    {
-      "title": "What the fuck",
-      "body": "asdasdhjahdllahd",
-      "publish": true,
-      "createdAt": 1672792980714,
-      "id": 6
-    },
-    {
-      "title": "test1",
-      "body": "test123",
-      "publish": true,
-      "createdAt": 1672792980714,
-      "id": 7
-    },
-    {
-      "title": "test2",
-      "body": "test123",
-      "publish": true,
-      "createdAt": 1672792980714,
-      "id": 8
-    },
-    {
-      "title": "test3",
-      "body": "test123",
-      "publish": false,
-      "createdAt": 1672792980714,
-      "id": 9
-    },
-    {
-      "title": "test4",
-      "body": "test123",
-      "publish": false,
-      "createdAt": 1672792980714,
-      "id": 10
-    },
-    {
-      "title": "test5",
-      "body": "test123",
-      "publish": true,
-      "createdAt": 1672792980714,
-      "id": 11
-    },
-    {
-      "title": "test6",
-      "body": "test123",
-      "publish": false,
-      "createdAt": 1672792980714,
-      "id": 12
-    },
-    {
-      "title": "test7",
-      "body": "test123",
-      "publish": false,
-      "createdAt": 1672792980714,
-      "id": 13
     }
   ]
 }

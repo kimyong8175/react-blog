@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import propTypes from "prop-types";
+import Toast from "../components/Toast";
+import useToast from "../hooks/toast";
 
 const BlogForm = ({ editing }) => {
+  const { addToast } = useToast();
   const { id } = useParams();
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -71,6 +74,7 @@ const BlogForm = ({ editing }) => {
   const onSubmit = () => {
     setTitleError(false);
     setBodyError(false);
+
     if (validateForm()) {
       if (editing) {
         axios
@@ -94,6 +98,10 @@ const BlogForm = ({ editing }) => {
             createdAt: Date.now(),
           })
           .then(() => {
+            addToast({
+              type: "success",
+              text: "Successfully created.",
+            });
             navigate("/admin");
           });
       }

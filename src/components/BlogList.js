@@ -7,10 +7,11 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import propTypes from "prop-types";
 import Pagination from "../components/Pagination";
 import { useLocation } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import Toast from "./Toast";
+import useToast from "../hooks/toast";
 
 const BlogList = ({ isAdmin }) => {
+  const limit = 5;
+
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -21,8 +22,7 @@ const BlogList = ({ isAdmin }) => {
   const [numOfPosts, setNumOfPosts] = useState(0);
   const [numOfPages, setNumOfPages] = useState(0);
   const [searchText, setSearchText] = useState("");
-  const [toasts, setToasts] = useState([]);
-  const limit = 5;
+  const { addToast } = useToast();
 
   useEffect(() => {
     setNumOfPages(Math.ceil(numOfPosts / limit));
@@ -66,24 +66,14 @@ const BlogList = ({ isAdmin }) => {
     getPosts(parseInt(pageParam) || 1);
   }, []);
 
-  const addToasts = (toast) => {
-    const toastWithId = {
-      ...toast,
-      id: uuidv4(),
-    };
-    setToasts((prev) => [...prev, toastWithId]);
-  };
-
-  const deleteToast = (id) => {};
-
   const deleteBlog = (e, id) => {
     e.stopPropagation();
 
     axios.delete(`http://localhost:3001/posts/${id}`).then(() => {
       setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
-      addToasts({
+      addToast({
         text: "Successfully deleted.",
-        type: "danger",
+        type: "success",
       });
     });
   };
@@ -117,19 +107,17 @@ const BlogList = ({ isAdmin }) => {
   if (loading) {
     return <LoadingSpinner />;
   }
-  console.log("console");
-  const PAGE_ONE = 1;
+
   const onSearch = (e) => {
     if (e.key === "Enter") {
       navigate(`${location.pathname}?page=1`);
-      setCurrentPage(PAGE_ONE);
+      setCurrentPage(1);
       getPosts(1);
     }
   };
 
   return (
     <div>
-      <Toast toasts={toasts} deleteToast={deleteToast} />
       <input
         type="text"
         placeholder="Search"
@@ -144,7 +132,7 @@ const BlogList = ({ isAdmin }) => {
       ) : (
         <>
           {renderBlogList()}
-          {numOfPages > 1 && (
+          {numOfPages > 0 && (
             <Pagination
               currentPage={currentPage}
               numberOfPages={numOfPages}

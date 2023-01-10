@@ -8,7 +8,9 @@ const Toast = ({ toasts, deleteToast }) => {
           <div
             key={toast.id}
             className={`cursor-pointer alert alert-${toast.type} m-0 py-2 mt-2`}
-            onClick={(id) => deleteToast(id)}
+            onClick={() => {
+              deleteToast(toast.id);
+            }}
           >
             {toast.text}
           </div>
