@@ -8,13 +8,6 @@
       "publish": true
     },
     {
-      "title": "Welcome",
-      "body": "Hello",
-      "publish": true,
-      "createdAt": 1673313597258,
-      "id": 2
-    },
-    {
       "title": "Friend with benefit",
       "body": "Romance Movie",
       "publish": false,
