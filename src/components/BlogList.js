@@ -22,6 +22,7 @@ const BlogList = ({ isAdmin }) => {
   const [numOfPosts, setNumOfPosts] = useState(0);
   const [numOfPages, setNumOfPages] = useState(0);
   const [searchText, setSearchText] = useState("");
+  const [error, setError] = useState("");
   const { addToast } = useToast();
 
   useEffect(() => {
@@ -57,6 +58,12 @@ const BlogList = ({ isAdmin }) => {
         setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
+        setError("Something went wrong in database");
+        addToast({
+          text: "Something went wrong!!",
+          type: "danger",
+        });
         console.log(err);
       });
   };
@@ -69,13 +76,23 @@ const BlogList = ({ isAdmin }) => {
   const deleteBlog = (e, id) => {
     e.stopPropagation();
 
-    axios.delete(`http://localhost:3001/posts/${id}`).then(() => {
-      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
-      addToast({
-        text: "Successfully deleted.",
-        type: "success",
+    axios
+      .delete(`http://localhost:3001/posts/${id}`)
+      .then(() => {
+        //setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
+        getPosts(1);
+        addToast({
+          text: "Successfully deleted.",
+          type: "success",
+        });
+      })
+      .catch((err) => {
+        addToast({
+          text: "The blog could not be deleted!!",
+          type: "danger",
+        });
+        console.log(err);
       });
-    });
   };
 
   const renderBlogList = () => {
@@ -104,9 +121,7 @@ const BlogList = ({ isAdmin }) => {
     });
   };
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+  if (loading) return <LoadingSpinner />;
 
   const onSearch = (e) => {
     if (e.key === "Enter") {
@@ -115,6 +130,8 @@ const BlogList = ({ isAdmin }) => {
       getPosts(1);
     }
   };
+
+  if (error.length > 0) return <div>{error}</div>;
 
   return (
     <div>

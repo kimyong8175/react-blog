@@ -4,6 +4,7 @@ import axios from "axios";
 import propTypes from "prop-types";
 import Toast from "../components/Toast";
 import useToast from "../hooks/toast";
+import LoadingSpinner from "./LoadingSpinner";
 
 const BlogForm = ({ editing }) => {
   const { addToast } = useToast();
@@ -17,6 +18,8 @@ const BlogForm = ({ editing }) => {
   const [originalPublish, setOriginalPublish] = useState(false);
   const [titleError, setTitleError] = useState(false);
   const [bodyError, setBodyError] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (editing) {
@@ -31,11 +34,18 @@ const BlogForm = ({ editing }) => {
 
           setPublish(res.data.checked);
           setOriginalPublish(res.data.checked);
+          setLoading(false);
         })
         .catch((err) => {
+          setError("There is some error in database");
+          addToast({
+            text: "There is some error in database",
+            type: "danger",
+          });
           console.log(err);
+          setLoading(false);
         });
-    }
+    } else setLoading(false);
   }, [id, editing]);
 
   const isEdited = () => {
@@ -87,6 +97,10 @@ const BlogForm = ({ editing }) => {
             navigate(`/blogs/${id}`);
           })
           .catch((err) => {
+            addToast({
+              text: "It is unavailable to update the blog!!",
+              type: "danger",
+            });
             console.log(err);
           });
       } else {
@@ -103,10 +117,22 @@ const BlogForm = ({ editing }) => {
               text: "Successfully created.",
             });
             navigate("/admin");
+          })
+          .catch((err) => {
+            addToast({
+              text: "It is unavailable to create the blog!!!!",
+              type: "danger",
+            });
+            console.log("Error: " + err);
           });
       }
     }
   };
+
+  if (loading) return <LoadingSpinner />;
+
+  if (error.length > 0) return <div>{error}</div>;
+
   return (
     <div>
       <h1>{editing ? "Edit" : "Create"} a blog post</h1>

@@ -48,9 +48,7 @@ const NavBar = () => {
                 Admin
               </NavLink>
             </li>
-          ) : (
-            ""
-          )}
+          ) : null}
 
           <li className="nav-item">
             <NavLink
